@@ -1,0 +1,35 @@
+﻿@page
+@model CoreWebApp.Pages.OnPostExModel
+@{
+}
+<html>
+
+<head>
+
+</head>
+<body>
+    <form method="post">
+        <table>
+            <tr>
+                <td>FirstName :</td>
+                <td><input type="text" id="txtfirstname" name="FirstName" /></td>
+            </tr>
+            <tr>
+                <td>LastName :</td>
+                <td><input type="text" id="txtlastname" name="LastName" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit"  asp-page-handler="Submit" />
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr><td>My FirstName and Last name is @Model.MyData</td></tr>
+        </table>
+
+    </form>
+
+</body>
+</html>

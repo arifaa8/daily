@@ -1,0 +1,32 @@
+﻿@page
+@model CoreWebApp.Pages.UserDetailsModel
+@{
+    Layout = "/Pages/Shared/_UserLayout.cshtml";
+}
+<h3>User Details page</h3>
+<table style="width:100%" border="1">
+    <tr>
+        <th>Name</th>
+        <th>EmailID</th>
+        <th>Password</th>
+        <th>Gender</th>
+        <th>Dept</th>
+        <th>City</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model.register)
+	{
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.NAME)</td>
+    <td>@Html.DisplayFor(modelItem => item.EMAILID)</td>
+    <td>@Html.DisplayFor(modelItem => item.PASSWORD)</td>
+    <td>@Html.DisplayFor(modelItem => item.GENDER)</td>
+    <td>@Html.DisplayFor(modelItem => item.DEPARTMENT)</td>
+    <td>@Html.DisplayFor(modelItem => item.CITY)</td>
+    <td><a asp-page="./Edit" asp-route-UserID="@item.UserID">Edit</a></td>
+    <td><a asp-page="./Delete">Delete</a></td>
+</tr> 
+	}
+</table>
+

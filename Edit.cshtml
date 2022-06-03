@@ -1,0 +1,65 @@
+﻿@page
+@model CoreWebApp.Pages.EditModel
+@{
+    Layout = "/Pages/Shared/_UserLayout.cshtml";
+}
+<h3>Edit Page</h3>
+<form method="post">
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <td> <input asp-for="register.NAME" /> </td>
+            <input type="hidden" asp-for="register.UserID" />
+        </tr>
+
+        <tr>
+            <th>EmailID</th>
+            <td> <input asp-for="register.EMAILID" /> </td>
+        </tr>
+
+        <tr>
+            <th>Password</th>
+            <td> <input asp-for="register.PASSWORD" /> </td>
+        </tr>
+
+        <tr>
+            <th>Gender</th>
+            <td>
+                <select asp-for="register.GENDER" class="form-control" style="background-color:white">
+                    <option value="--Select--"> </option>
+                    <option value="Male">Male </option>
+                    <option value="Female">Female</option>
+                </select>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>Department</th>
+            <td>
+                <select asp-for="register.DEPARTMENT" class="form-control">
+                    <option value="--Select--"> </option>
+                    <option value="IT">IT</option>
+                    <option value="Sales">SALES</option>
+                    <option value="Production">Production</option>
+                    <option value="HR">HR</option>
+                </select>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>City</th>
+            <td> <input asp-for="register.CITY" /> </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update Data" />
+            </td>
+        </tr>
+
+    </table>
+</form>
