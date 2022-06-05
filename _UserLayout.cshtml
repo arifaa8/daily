@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <table style="width:100%;background-color:orange;text-align:center;border-style:solid;border-radius:20px">
+        <tr>
+            <td>Razor Page Application</td>
+        </tr>
+    </table>
+    <table style="width:100%;background-color:yellow;text-align:center;border-style:solid;border-radius:20px">
+        <tr>
+            <td> <a asp-page="Home"> Home  </a></td>
+            <td> <a asp-page="UserDetails"> User Details</a></td>
+            <td> <a asp-page="Login"> Logout</a></td>
+        </tr>
+    </table>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
