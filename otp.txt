@@ -1,0 +1,111 @@
+using System.Net;
+using System.Net.Mail;
+
+
+ public bool SendEmail()
+        {
+            bool chk = false;
+            try
+            {
+                
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("onlyonemoin@gmail.com");
+                mail.To.Add("sanober9881@gmail.com");
+                mail.IsBodyHtml = true;
+                mail.Subject = "OTP";
+                mail.Body = "Your OTP is " + HttpContext.Session.GetString("OTP");
+
+                SmtpClient clint = new SmtpClient("smtp.gmail.com", 587);
+                clint.Credentials = new NetworkCredential("onlyonemoin@gmail.com", "gtxgoiksyrkxpsej");
+                clint.EnableSsl = true;
+                clint.Send(mail);
+                chk = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            return chk;
+        }
+
+
+
+
+		-----------
+
+		public IActionResult OnPost()
+        {
+            bool res = Curd.Login(register);
+            if (res==true)
+            {
+                HttpContext.Session.SetString("LoggedInEmail",register.EMAILID);
+                HttpContext.Session.SetString("LoggedInTime", System.DateTime.Now.ToShortTimeString());
+
+                Random rand = new Random();
+                HttpContext.Session.SetString("OTP",rand.Next(1111,9999).ToString());
+
+                bool result = SendEmail();
+                if (result == true)
+                {
+                   return RedirectToPage("./VerifyOTP");
+
+                }
+                else
+                {
+                   return RedirectToPage("./Error");
+                }
+               
+            }
+            else
+            {
+                return RedirectToPage("./Error");
+            }
+        }
+
+
+		--------
+
+
+		<h3>Verify OTP</h3>
+<form method="post">
+    <table>
+        <tr>
+            <td>Enteer OTP</td>
+            <td><input asp-for="txtOTP" /></td>
+        </tr>
+        <tr><td>
+            <input type="submit" value="submit" name="Verify OTP" />
+            </td></tr> 
+
+        <tr><td>@ViewData["OTP"]</td></tr>
+    </table>
+</form>
+
+
+  [BindProperty]
+        public string txtOTP { get; set; }
+        public void OnGet()
+        {
+        }
+
+        public ActionResult OnPost()
+        {
+            if (String.IsNullOrEmpty(txtOTP))
+            {
+                ViewData["OTP"] = "Please Enter OTP";
+                return Page();
+            }
+
+
+            if (txtOTP.Equals(HttpContext.Session.GetString("OTP")))
+            {
+                return RedirectToPage("./Home");
+            }
+            else
+            {
+                ViewData["OTP"] = "  OTP is Not correct";
+                return  Page();
+            }
+        }
